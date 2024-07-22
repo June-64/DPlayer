@@ -29,7 +29,6 @@
         margin: 0;
         padding: 0;
         transform: translate(0, 0);
-        
     }
 
     &.dplayer-no-danmaku {
@@ -54,12 +53,15 @@
         .dplayer-time {
             display: none;
         }
+
         .dplayer-bar-wrap {
             display: none;
         }
+
         .dplayer-setting-speed {
             display: none;
         }
+
         .dplayer-setting-loop {
             display: none;
         }
@@ -75,6 +77,7 @@
         .dplayer-danmaku {
             font-size: 18px;
         }
+
         .dplayer-icon {
             margin: 0 -3px;
         }
@@ -89,6 +92,7 @@
             .dplayer-controller-mask {
                 opacity: 0;
             }
+
             .dplayer-controller {
                 opacity: 0;
             }
@@ -97,6 +101,7 @@
                 .dplayer-controller-mask {
                     opacity: 1;
                 }
+
                 .dplayer-controller {
                     opacity: 1;
                 }
@@ -125,19 +130,23 @@
             opacity: 0;
             transform: translateY(100%);
         }
+
         .dplayer-controller {
             opacity: 0;
             transform: translateY(100%);
         }
     }
+
     &.dplayer-show-controller {
         .dplayer-controller-mask {
             opacity: 1;
         }
+
         .dplayer-controller {
             opacity: 1;
         }
     }
+
     &.dplayer-fulled {
         position: fixed;
         z-index: 100000;
@@ -146,15 +155,17 @@
         width: 100% !important;
         height: 100% !important;
     }
+
     &.dplayer-mobile {
         .dplayer-controller .dplayer-icons {
             .dplayer-volume,
-            .dplayer-camera-icon,
-            .dplayer-airplay-icon,
-            .dplayer-chromecast-icon,
-            .dplayer-play-icon {
+        //.dplayer-play-icon,
+      .dplayer-camera-icon,
+      .dplayer-airplay-icon,
+      .dplayer-chromecast-icon {
                 display: none;
             }
+
             .dplayer-full .dplayer-full-in-icon {
                 position: static;
                 display: inline-block;

@@ -3,6 +3,7 @@ import pause from '../assets/pause.svg';
 import volumeUp from '../assets/volume-up.svg';
 import volumeDown from '../assets/volume-down.svg';
 import volumeOff from '../assets/volume-off.svg';
+import volumeMuted from '../assets/volume-muted.svg';
 import full from '../assets/full.svg';
 import fullWeb from '../assets/full-web.svg';
 import setting from '../assets/setting.svg';
@@ -36,6 +37,7 @@ const Icons = {
     loading: loading,
     airplay: airplay,
     chromecast: chromecast,
+    volumeMuted: volumeMuted,
 };
 
 export default Icons;

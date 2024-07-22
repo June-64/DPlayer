@@ -1,3 +1,4 @@
+
 <div class="dplayer-mask"></div>
 <div class="dplayer-video-wrap">
     {{ include './video.art' video }}
@@ -18,6 +19,7 @@
         <span class="diplayer-loading-icon">{{@ icons.loading }}</span>
     </div>
 </div>
+
 <div class="dplayer-controller-mask"></div>
 <div class="dplayer-controller">
     <div class="dplayer-icons dplayer-comment-box">
@@ -207,9 +209,11 @@
             </div>
         </div>
         <div class="dplayer-full">
-            <button class="dplayer-icon dplayer-full-in-icon" data-balloon="{{ tran('web-fullscreen') }}" data-balloon-pos="up">
-                <span class="dplayer-icon-content">{{@ icons.fullWeb }}</span>
-            </button>
+            {{ if options.showFullweb }}
+                <button class="dplayer-icon dplayer-full-in-icon" data-balloon="{{ tran('web-fullscreen') }}" data-balloon-pos="up">
+                    <span class="dplayer-icon-content">{{@ icons.fullWeb }}</span>
+                </button>
+            {{ /if }}
             <button class="dplayer-icon dplayer-full-icon" data-balloon="{{ tran('fullscreen') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.full }}</span>
             </button>
