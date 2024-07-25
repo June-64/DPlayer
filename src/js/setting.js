@@ -4,6 +4,13 @@ class Setting {
     constructor(player) {
         this.player = player;
 
+        this.player.template.arrowLeft.addEventListener('click', () => {
+            // 如果是全屏就退出全屏
+            if (this.player.fullScreen.isFullScreen()) {
+                this.player.fullScreen.cancel();
+            }
+        });
+
         this.player.template.mask.addEventListener('click', () => {
             this.hide();
         });

@@ -55,6 +55,7 @@ class FullScreen {
     }
 
     request(type = 'browser') {
+        this.player.template.controllerTop.style.display = 'flex';
         const anotherType = type === 'browser' ? 'web' : 'browser';
         const anotherTypeOn = this.isFullScreen(anotherType);
         if (!anotherTypeOn) {
@@ -91,6 +92,7 @@ class FullScreen {
     }
 
     cancel(type = 'browser') {
+        this.player.template.controllerTop.style.display = 'none';
         switch (type) {
             case 'browser':
                 if (document.cancelFullScreen) {

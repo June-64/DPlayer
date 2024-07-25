@@ -58,36 +58,36 @@ function initPlayers() {
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
         preload: 'none',
-        screenshot: true,
+        title:"测试标题",
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
             pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
-        subtitle: {
-            url: [
-                {
-                    url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
-                    lang: 'zh-cn',
-                    name: '光',
-                },
-                {
-                    url: 'https://gist.githubusercontent.com/samdutton/ca37f3adaf4e23679957b8083e061177/raw/e19399fbccbc069a2af4266e5120ae6bad62699a/sample.vtt',
-                    lang: 'en-us',
-                    name: 'github',
-                },
-            ],
-            defaultSubtitle: 7,
-            type: 'webvtt',
-            fontSize: '25px',
-            bottom: '10%',
-            color: '#b7daff'
-        },
-        danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/',
-            addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
-        }
+        // subtitle: {
+        //     url: [
+        //         {
+        //             url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
+        //             lang: 'zh-cn',
+        //             name: '光',
+        //         },
+        //         {
+        //             url: 'https://gist.githubusercontent.com/samdutton/ca37f3adaf4e23679957b8083e061177/raw/e19399fbccbc069a2af4266e5120ae6bad62699a/sample.vtt',
+        //             lang: 'en-us',
+        //             name: 'github',
+        //         },
+        //     ],
+        //     defaultSubtitle: 7,
+        //     type: 'webvtt',
+        //     fontSize: '25px',
+        //     bottom: '10%',
+        //     color: '#b7daff'
+        // },
+        // danmaku: {
+        //     id: '9E2E3368B56CDBB4',
+        //     api: 'https://api.prprpr.me/dplayer/',
+        //     addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
+        // }
     });
 
     // dp2

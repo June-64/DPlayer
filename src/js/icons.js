@@ -17,6 +17,7 @@ import airplay from '../assets/airplay.svg';
 import subtitle from '../assets/subtitle.svg';
 import loading from '../assets/loading.svg';
 import chromecast from '../assets/chromecast.svg';
+import arrowLeft from '../assets/arrow-left.svg';
 
 const Icons = {
     play: play,
@@ -38,6 +39,7 @@ const Icons = {
     airplay: airplay,
     chromecast: chromecast,
     volumeMuted: volumeMuted,
+    arrowLeft: arrowLeft,
 };
 
 export default Icons;

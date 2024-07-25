@@ -1,0 +1,31 @@
+.dplayer-controller-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    padding: 20px;
+    color: white;
+    display: none;
+    align-items: center;
+    transition: all 0.3s ease;
+    .diplayer-arrow-left-icon {
+        display: block;
+        width: 18px;
+        height: 18px;
+    }
+
+    &-title {
+        margin-left: 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        font-size: 14px;
+    }
+}
+
+.dplayer-hide-controller-top {
+    opacity: 0;
+    transform: translateY(-100%);
+    cursor: none;
+}

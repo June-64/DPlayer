@@ -31,8 +31,8 @@ class Template {
         });
 
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
-        this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
-        this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');
+        // this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
+        // this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');
         this.volumeButton = this.container.querySelector('.dplayer-volume');
         this.volumeButtonIcon = this.container.querySelector('.dplayer-volume-icon');
         this.volumeIcon = this.container.querySelector('.dplayer-volume-icon .dplayer-icon-content');
@@ -104,6 +104,10 @@ class Template {
         this.infoDanmakuId = this.container.querySelector('.dplayer-info-panel-item-danmaku-id .dplayer-info-panel-item-data');
         this.infoDanmakuApi = this.container.querySelector('.dplayer-info-panel-item-danmaku-api .dplayer-info-panel-item-data');
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
+
+        this.controllerTop = this.container.querySelector('.dplayer-controller-top');
+        this.arrowLeft = this.container.querySelector('.diplayer-arrow-left-icon');
+        this.controllerTopTitle = this.container.querySelector('.dplayer-controller-top-title');
     }
 
     static NewNotice(text, opacity, id) {

@@ -289,9 +289,9 @@ class DPlayer {
         if (!isNaN(percentage)) {
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
-            this.bar.set('volume', percentage, 'width');
+            // this.bar.set('volume', percentage, 'width');
             const formatPercentage = `${(percentage * 100).toFixed(0)}%`;
-            this.template.volumeBarWrapWrap.dataset.balloon = formatPercentage;
+            // this.template.volumeBarWrapWrap.dataset.balloon = formatPercentage;
             if (!nostorage) {
                 this.user.set('volume', percentage);
             }
@@ -337,6 +337,7 @@ class DPlayer {
         this.pause();
         this.video.poster = video.pic ? video.pic : '';
         this.video.src = video.url;
+        this.video.title = video.title || '';
         this.initMSE(this.video, video.type || 'auto');
         if (danmakuAPI) {
             this.template.danmakuLoading.style.display = 'block';
