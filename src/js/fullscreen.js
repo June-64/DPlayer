@@ -18,6 +18,7 @@ class FullScreen {
                 this.player.events.trigger('fullscreen');
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
+                this.player.template.controllerTop.style.display = 'none';
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
@@ -31,6 +32,7 @@ class FullScreen {
                 this.player.events.trigger('fullscreen');
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
+                this.player.template.controllerTop.style.display = 'none';
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
