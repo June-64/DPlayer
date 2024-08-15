@@ -3,12 +3,14 @@
 </p>
 <h1 align="center">DPlayer</h1>
 
-> 🍭 Wow, such a lovely HTML5 danmaku video player
+> fork dplayer
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
+
+### 项目根据 [DPlayer](https://github.com/video-dev/hls.js) 进行修改
 
 ## Introduction
 
