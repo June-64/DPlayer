@@ -187,9 +187,9 @@ class Controller {
         const vWidth = 35;
 
         const volumeMove = (event) => {
-            // const e = event || window.event;
-            // const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
-            // this.player.volume(percentage);
+            const e = event || window.event;
+            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            this.player.volume(percentage);
         };
         const volumeUp = () => {
             document.removeEventListener(utils.nameMap.dragEnd, volumeUp);
@@ -197,27 +197,27 @@ class Controller {
             this.player.template.volumeButton.classList.remove('dplayer-volume-active');
         };
 
-        // this.player.template.volumeBarWrapWrap.addEventListener('click', (event) => {
-        //     const e = event || window.event;
-        //     const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
-        //     this.player.volume(percentage);
-        // });
-        // this.player.template.volumeBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
-        //     document.addEventListener(utils.nameMap.dragMove, volumeMove);
-        //     document.addEventListener(utils.nameMap.dragEnd, volumeUp);
-        //     this.player.template.volumeButton.classList.add('dplayer-volume-active');
-        // });
+        this.player.template.volumeBarWrapWrap.addEventListener('click', (event) => {
+            const e = event || window.event;
+            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            this.player.volume(percentage);
+        });
+        this.player.template.volumeBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
+            document.addEventListener(utils.nameMap.dragMove, volumeMove);
+            document.addEventListener(utils.nameMap.dragEnd, volumeUp);
+            this.player.template.volumeButton.classList.add('dplayer-volume-active');
+        });
         this.player.template.volumeButtonIcon.addEventListener('click', () => {
-            console.log(this.player.video.muted);
             if (this.player.video.muted) {
                 this.player.video.muted = false;
-                this.player.volume(0.7, false, true);
+                const localVolume = utils.storage.get('dplayer-volume');
+                this.player.volume(localVolume || 0.7, false, true);
                 this.player.switchVolumeIcon();
-                // this.player.bar.set('volume', this.player.volume(), 'width');
+                this.player.bar.set('volume', this.player.volume(), 'width');
             } else {
                 this.player.video.muted = true;
                 this.player.template.volumeIcon.innerHTML = Icons.volumeOff;
-                // this.player.bar.set('volume', 0, 'width');
+                this.player.bar.set('volume', 0, 'width');
             }
         });
     }

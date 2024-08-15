@@ -60,24 +60,32 @@ class FullScreen {
         this.player.template.controllerTop.style.display = 'flex';
         const anotherType = type === 'browser' ? 'web' : 'browser';
         const anotherTypeOn = this.isFullScreen(anotherType);
+
         if (!anotherTypeOn) {
             this.lastScrollPosition = utils.getScrollPosition();
         }
+        console.log(type, anotherType, anotherTypeOn, this.lastScrollPosition);
 
         switch (type) {
             case 'browser':
                 if (this.player.container.requestFullscreen) {
+                    console.log('requestFullscreen');
                     this.player.container.requestFullscreen();
                 } else if (this.player.container.mozRequestFullScreen) {
+                    console.log('mozRequestFullScreen');
                     this.player.container.mozRequestFullScreen();
                 } else if (this.player.container.webkitRequestFullscreen) {
+                    console.log('webkitRequestFullscreen');
                     this.player.container.webkitRequestFullscreen();
                 } else if (this.player.video.webkitEnterFullscreen) {
                     // Safari for iOS
+                    console.log('webkitEnterFullscreen');
                     this.player.video.webkitEnterFullscreen();
                 } else if (this.player.video.webkitEnterFullScreen) {
+                    console.log('webkitEnterFullScreen');
                     this.player.video.webkitEnterFullScreen();
                 } else if (this.player.container.msRequestFullscreen) {
+                    console.log('msRequestFullscreen');
                     this.player.container.msRequestFullscreen();
                 }
                 break;
