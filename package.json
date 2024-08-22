@@ -1,7 +1,7 @@
 {
-    "name": "dplayer-zzj",
-    "version": "1.27.1",
-    "description": "Wow, such a lovely HTML5 danmaku video player",
+    "name": "zzj-player",
+    "version": "1.27.3",
+    "description": "根据DPlayer进行了一些个性化修改",
     "main": "dist/DPlayer.min.js",
     "scripts": {
         "start": "npm run dev",
@@ -17,7 +17,8 @@
         "**/*": "prettier --write --ignore-unknown"
     },
     "files": [
-        "dist"
+        "dist",
+        "**/*.d.ts"
     ],
     "repository": {
         "url": "git+https://github.com/June-64/DPlayer.git",

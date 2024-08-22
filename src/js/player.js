@@ -36,7 +36,7 @@ class DPlayer {
         this.options = handleOption({ preload: options.video.type === 'webtorrent' ? 'none' : 'metadata', ...options });
 
         if (this.options.video.quality) {
-            this.qualityIndex = this.options.video.defaultQuality;
+            this.qualityIndex = this.options.video.defaultQuality || 0;
             this.quality = this.options.video.quality[this.options.video.defaultQuality];
         }
         this.tran = new i18n(this.options.lang).tran;
@@ -191,15 +191,18 @@ class DPlayer {
     /**
      * Seek video
      */
-    seek(time) {
+    seek(time, showNotice = true) {
         time = Math.max(time, 0);
         if (this.video.duration) {
             time = Math.min(time, this.video.duration);
         }
-        if (this.video.currentTime < time) {
-            this.notice(`${this.tran('ff').replace('%s', (time - this.video.currentTime).toFixed(0))}`);
-        } else if (this.video.currentTime > time) {
-            this.notice(`${this.tran('rew').replace('%s', (this.video.currentTime - time).toFixed(0))}`);
+        console.log('🚀 ~ DPlayer ~ seek ~ Math.abs(time - this.video.currentTime).toFixed(0) > 0 && showNotice:', Math.abs(time - this.video.currentTime).toFixed(0) > 0, showNotice);
+        if (Math.abs(time - this.video.currentTime).toFixed(0) > 0 && showNotice) {
+            if (this.video.currentTime < time) {
+                this.notice(`${this.tran('ff').replace('%s', (time - this.video.currentTime).toFixed(0))}`);
+            } else if (this.video.currentTime > time) {
+                this.notice(`${this.tran('rew').replace('%s', (this.video.currentTime - time).toFixed(0))}`);
+            }
         }
 
         this.video.currentTime = time;
@@ -338,6 +341,17 @@ class DPlayer {
         this.video.poster = video.pic ? video.pic : '';
         this.video.src = video.url;
         this.video.title = video.title || '';
+        this.options.video.quality = video.quality || [];
+        this.options.video.defaultQuality = video.defaultQuality || 0;
+
+        if (this.options.video.quality.length === 0) {
+            this.template.qualityButton.innerHTML = '';
+        } else {
+            this.qualityIndex = this.options.video.defaultQuality || 0;
+            this.quality = this.options.video.quality[this.options.video.defaultQuality];
+            this.template.qualityButton.innerHTML = this.quality.name;
+        }
+
         this.initMSE(this.video, video.type || 'auto');
         if (danmakuAPI) {
             this.template.danmakuLoading.style.display = 'block';
@@ -363,6 +377,7 @@ class DPlayer {
         if (this.options.video.customType && this.options.video.customType[type]) {
             if (Object.prototype.toString.call(this.options.video.customType[type]) === '[object Function]') {
                 this.options.video.customType[type](this.video, this);
+                console.log('=>(player.js:367) this.option.video', this.options.video);
             } else {
                 console.error(`Illegal customType: ${type}`);
             }
@@ -578,6 +593,8 @@ class DPlayer {
             this.prevIndex = this.qualityIndex;
             this.qualityIndex = index;
         }
+        this.controller.hide();
+
         this.switchingQuality = true;
         this.quality = this.options.video.quality[index];
         this.template.qualityButton.innerHTML = this.quality.name;
@@ -597,16 +614,17 @@ class DPlayer {
         this.prevVideo = this.video;
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
-        this.seek(this.prevVideo.currentTime);
+        this.seek(this.prevVideo.currentTime, false);
         this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1, undefined, 'switch-quality');
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
             if (this.prevVideo) {
-                if (this.video.currentTime !== this.prevVideo.currentTime) {
-                    this.seek(this.prevVideo.currentTime);
-                    return;
-                }
+                if (parseInt(this.prevVideo.currentTime) > 0 && parseInt(this.prevVideo.currentTime) > 0)
+                    if (this.video.currentTime !== this.prevVideo.currentTime) {
+                        this.seek(this.prevVideo.currentTime, false);
+                        return;
+                    }
                 this.template.videoWrap.removeChild(this.prevVideo);
                 this.video.classList.add('dplayer-video-current');
                 if (!paused) {
@@ -615,7 +633,6 @@ class DPlayer {
                 this.prevVideo = null;
                 this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`, undefined, undefined, 'switch-quality');
                 this.switchingQuality = false;
-
                 this.events.trigger('quality_end');
             }
         });
@@ -661,7 +678,6 @@ class DPlayer {
         }
 
         this.events.trigger('notice_show', oldNoticeEle);
-
         if (time > 0) {
             this.noticeList[id] = setTimeout(
                 (function (e, dp) {

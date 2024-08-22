@@ -59,10 +59,33 @@ function initPlayers() {
         container: document.getElementById('dplayer1'),
         preload: 'none',
         title:"测试标题",
+
         video: {
-            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
+            quality:[
+                {
+                    name: 'HD',
+                    url: "http://192.168.0.102:9527/m3u8/enc/test.m3u8",
+                    type: 'auto',
+                },
+                {
+                    name: 'SD',
+                    url: "http://192.168.0.102:9527/m3u8/enc/test.m3u8",
+                    type: 'auto',
+                },
+            ],
+            defaultQuality: 0,
+            // url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
+            // pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            // thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
+            url:"http://192.168.0.102:9527/m3u8/enc/test.m3u8",
+            // type : 'customHls',
+            // customType : {
+            //     customHls: function (video, player) {
+            //         const hls = new Hls()
+            //         hls.loadSource(video.src)
+            //         hls.attachMedia(video)
+            //     }
+            // }
         },
         // subtitle: {
         //     url: [
