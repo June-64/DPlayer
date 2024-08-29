@@ -1,6 +1,10 @@
 .dplayer-logo {
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
+    overflow: hidden;
     left: 20px;
     top: 20px;
     max-width: 50px;
@@ -8,6 +12,33 @@
     img {
         max-width: 100%;
         max-height: 100%;
+        object-fit: cover;
         background: none;
     }
+}
+
+@keyframes moveLogo {
+    0% {
+        left: 20px;
+        top: 20px;
+    }
+    20% {
+        left: calc(100% - 50px - 20px); /* 假设父容器宽度足够 */
+        top: 20px;
+    }
+    40% {
+        left: calc(100% - 50px - 20px);
+        top: calc(100% - 50px - 20px);
+    }
+    60% {
+        left: 20px;
+        top: calc(100% - 50px - 20px);
+    }
+    80% {
+        left: 20px;
+        top: 20px;
+    }
+}
+.dplayer-logo-animate {
+    animation: moveLogo 60s steps(1) infinite;
 }

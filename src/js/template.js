@@ -29,7 +29,7 @@ class Template {
                 subtitle: this.options.subtitle,
             },
         });
-
+        this.logo = this.container.querySelector('.dplayer-logo');
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
         this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
         this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');

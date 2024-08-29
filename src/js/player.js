@@ -106,7 +106,19 @@ class DPlayer {
             tran: this.tran,
         });
 
+        if (this.options.logo) {
+            this.template.logo.style.maxWidth = this.options.logo.width || '50px';
+            this.template.logo.style.maxHeight = this.options.logo.height || '50px';
+            this.template.logo.style.left = this.options.logo.x || '20px';
+            this.template.logo.style.top = this.options.logo.y || '20px';
+            this.template.logo.style.opacity = this.options.logo.opacity || 1;
+            // 如果自定义了logo的x,y,则不添加动画
+            if (this.options.logo.move && !this.options.logo.x && !this.options.logo.y) {
+                this.template.logo.classList.add('dplayer-logo-animate');
+            }
+        }
         this.video = this.template.video;
+        // this.video.src = this.options.video.url;
 
         this.bar = new Bar(this.template);
 
@@ -196,7 +208,6 @@ class DPlayer {
         if (this.video.duration) {
             time = Math.min(time, this.video.duration);
         }
-        console.log('🚀 ~ DPlayer ~ seek ~ Math.abs(time - this.video.currentTime).toFixed(0) > 0 && showNotice:', Math.abs(time - this.video.currentTime).toFixed(0) > 0, showNotice);
         if (Math.abs(time - this.video.currentTime).toFixed(0) > 0 && showNotice) {
             if (this.video.currentTime < time) {
                 this.notice(`${this.tran('ff').replace('%s', (time - this.video.currentTime).toFixed(0))}`);
@@ -275,9 +286,9 @@ class DPlayer {
     }
 
     switchVolumeIcon() {
-        if (this.volume() >= 0.95) {
+        if (this.video.volume >= 0.95) {
             this.template.volumeIcon.innerHTML = Icons.volumeUp;
-        } else if (this.volume() > 0) {
+        } else if (this.video.volume > 0) {
             this.template.volumeIcon.innerHTML = Icons.volumeDown;
         } else {
             this.template.volumeIcon.innerHTML = Icons.volumeOff;
@@ -305,6 +316,9 @@ class DPlayer {
             this.video.volume = percentage;
             if (this.video.muted) {
                 this.video.muted = false;
+            }
+            if (this.video.volume === 0) {
+                this.video.muted = true;
             }
             this.switchVolumeIcon();
         }
@@ -375,14 +389,15 @@ class DPlayer {
     initMSE(video, type) {
         this.type = type;
         if (this.options.video.customType && this.options.video.customType[type]) {
+            console.log('customType');
             if (Object.prototype.toString.call(this.options.video.customType[type]) === '[object Function]') {
                 this.options.video.customType[type](this.video, this);
-                console.log('=>(player.js:367) this.option.video', this.options.video);
             } else {
                 console.error(`Illegal customType: ${type}`);
             }
         } else {
             if (this.type === 'auto') {
+                console.log(video.src);
                 if (/m3u8(#|\?|$)/i.exec(video.src)) {
                     this.type = 'hls';
                 } else if (/.flv(#|\?|$)/i.exec(video.src)) {
@@ -397,6 +412,7 @@ class DPlayer {
             if (this.type === 'hls' && (video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL'))) {
                 this.type = 'normal';
             }
+            console.log('initMSE', type, this.type);
 
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
@@ -501,7 +517,6 @@ class DPlayer {
 
     initVideo(video, type) {
         this.initMSE(video, type);
-
         /**
          * video events
          */
@@ -521,6 +536,7 @@ class DPlayer {
 
         // video download error: an error occurs
         this.on('error', () => {
+            console.log('error');
             if (!this.video.error) {
                 // Not a video load error, may be poster load failed, see #307
                 return;
@@ -553,7 +569,9 @@ class DPlayer {
                 this.pause(true);
             }
         });
-
+        this.on('canplay', () => {
+            this.play();
+        });
         this.on('timeupdate', () => {
             if (!this.moveBar) {
                 this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
@@ -569,9 +587,7 @@ class DPlayer {
                 this.events.trigger(this.events.videoEvents[i], e);
             });
         }
-
         this.volume(this.user.get('volume'), true, true);
-
         if (this.options.subtitle) {
             // init old single subtitle function(sub show and style)
             this.subtitle = new Subtitle(this.template.subtitle, this.video, this.options.subtitle, this.events);
@@ -627,9 +643,9 @@ class DPlayer {
                     }
                 this.template.videoWrap.removeChild(this.prevVideo);
                 this.video.classList.add('dplayer-video-current');
-                if (!paused) {
-                    this.video.play();
-                }
+                // if (!paused) {
+                this.video.play();
+                // }
                 this.prevVideo = null;
                 this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`, undefined, undefined, 'switch-quality');
                 this.switchingQuality = false;

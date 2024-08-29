@@ -4,7 +4,7 @@
     {{ include './video.art' video }}
     {{ if options.logo }}
     <div class="dplayer-logo">
-        <img src="{{ options.logo }}">
+        <img src="{{ options.logo.url }}" mode="widthFix">
     </div>
     {{ /if }}
     <div class="dplayer-danmaku"{{ if options.danmaku && options.danmaku.bottom }} style="margin-bottom:{{ options.danmaku.bottom }}"{{ /if }}>

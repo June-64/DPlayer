@@ -209,15 +209,12 @@ class Controller {
         });
         this.player.template.volumeButtonIcon.addEventListener('click', () => {
             if (this.player.video.muted) {
-                this.player.video.muted = false;
-                const localVolume = utils.storage.get('dplayer-volume');
-                this.player.volume(localVolume || 0.7, false, true);
-                this.player.switchVolumeIcon();
-                this.player.bar.set('volume', this.player.volume(), 'width');
+                const localVolume = this.player.user.get('volume');
+                const volume = this.player.volume(localVolume || 0.7, false, true);
+                this.player.bar.set('volume', volume, 'width');
             } else {
-                this.player.video.muted = true;
-                this.player.template.volumeIcon.innerHTML = Icons.volumeOff;
-                this.player.bar.set('volume', 0, 'width');
+                const volume = this.player.volume(0, false, true);
+                this.player.bar.set('volume', volume, 'width');
             }
         });
     }

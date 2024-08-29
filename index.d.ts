@@ -142,8 +142,8 @@ declare module 'zzj-player' {
             // 清晰度选项，需要具体化结构
             quality?: any[];
 
-            // 默认清晰度
-            defaultQuality?: string;
+            // 默认清晰度下标
+            defaultQuality?: number;
 
             // 视频链接
             url: string;
